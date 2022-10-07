@@ -1,7 +1,6 @@
 package com.costardstudio.patterns.features.observer.view;
 
 import com.costardstudio.patterns.features.observer.controller.CalculatorButtonController;
-import com.costardstudio.patterns.features.observer.view.CalculatorScreen;
 
 import java.util.List;
 import java.util.Objects;

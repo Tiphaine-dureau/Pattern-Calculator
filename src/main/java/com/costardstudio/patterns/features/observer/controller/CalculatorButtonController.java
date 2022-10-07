@@ -1,23 +1,22 @@
 package com.costardstudio.patterns.features.observer.controller;
 
 import com.costardstudio.patterns.features.observer.services.CalculatorService;
+import com.costardstudio.patterns.features.observer.view.ActionView;
 
-import javax.swing.*;
 import java.awt.event.ActionListener;
 
 public abstract class CalculatorButtonController implements ActionListener, OperationPerform {
 
-    protected final JButton button;
     protected CalculatorService calculatorService;
+    private final ActionView actionView;
 
-    public CalculatorButtonController(CalculatorService calculatorService, String buttonLabel) {
+    public CalculatorButtonController(CalculatorService calculatorService, String label) {
         this.calculatorService = calculatorService;
-        this.button = new JButton();
-        this.button.setText(buttonLabel);
-        this.button.addActionListener(this::actionPerformed);
+        this.actionView = new ActionView(label);
+        this.actionView.getButton().addActionListener(this);
     }
 
-    public JButton getButton() {
-        return button;
+    public ActionView getActionView() {
+        return actionView;
     }
 }

@@ -1,8 +1,5 @@
 package com.costardstudio.patterns.features.observer.controller;
 
-import com.costardstudio.patterns.features.observer.controller.AdditionButtonController;
-import com.costardstudio.patterns.features.observer.controller.NumericButtonController;
-import com.costardstudio.patterns.features.observer.controller.ResultButtonController;
 import com.costardstudio.patterns.features.observer.services.CalculatorService;
 import com.costardstudio.patterns.features.observer.view.InputScreen;
 import com.costardstudio.patterns.features.observer.view.ResultScreen;
@@ -28,10 +25,10 @@ public class SimpleCalculator {
 
         calculatorPanel.add(currentInputLabel.getLabel());
         calculatorPanel.add(resultLabel.getLabel());
-        calculatorPanel.add(oneButton.getButton());
-        calculatorPanel.add(twoButton.getButton());
-        calculatorPanel.add(plusButton.getButton());
-        calculatorPanel.add(equalButton.getButton());
+        calculatorPanel.add(oneButton.getActionView().getButton());
+        calculatorPanel.add(twoButton.getActionView().getButton());
+        calculatorPanel.add(plusButton.getActionView().getButton());
+        calculatorPanel.add(equalButton.getActionView().getButton());
     }
 
     public JPanel getCalculatorPanel() {

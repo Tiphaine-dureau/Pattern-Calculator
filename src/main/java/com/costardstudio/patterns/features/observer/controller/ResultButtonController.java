@@ -1,6 +1,5 @@
 package com.costardstudio.patterns.features.observer.controller;
 
-import com.costardstudio.patterns.features.observer.controller.CalculatorButtonController;
 import com.costardstudio.patterns.features.observer.services.CalculatorService;
 
 import java.awt.event.ActionEvent;
