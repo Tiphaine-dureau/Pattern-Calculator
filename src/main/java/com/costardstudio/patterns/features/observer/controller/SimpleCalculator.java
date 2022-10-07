@@ -8,34 +8,19 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SimpleCalculator {
-
-    JPanel calculatorPanel;
     CalculatorService calculatorService = new CalculatorService();
     private final JPanel screenPanel;
+    private final JPanel numericButtonsPanel;
+    private final JPanel operatorButtonsPanel;
+    private final JPanel calculatorPanel;
 
     //Constructor
     public SimpleCalculator() {
         calculatorPanel = new JPanel();
         screenPanel = new JPanel();
-
-        NumericButtonController oneButton = new NumericButtonController(this.calculatorService, "1");
-        NumericButtonController twoButton = new NumericButtonController(this.calculatorService, "2");
-        AdditionButtonController plusButton = new AdditionButtonController(this.calculatorService);
-        ResultButtonController equalButton = new ResultButtonController(this.calculatorService);
-
-        calculatorPanel.add(screenPanel);
-
-        calculatorPanel.add(oneButton.getActionView().getButton());
-        calculatorPanel.add(twoButton.getActionView().getButton());
-        calculatorPanel.add(plusButton.getActionView().getButton());
-        calculatorPanel.add(equalButton.getActionView().getButton());
-
-        configureScreenPanel();
-
-    }
-
-    public JPanel getCalculatorPanel() {
-        return calculatorPanel;
+        numericButtonsPanel = new JPanel();
+        operatorButtonsPanel = new JPanel();
+        configureInterfaceCalculatorPanel();
     }
 
     public void configureScreenPanel(){
@@ -43,6 +28,7 @@ public class SimpleCalculator {
         configureInputScreen();
         configureResultScreen();
         this.screenPanel.setLayout(screenGridLayout);
+
     }
 
     public void configureResultScreen(){
@@ -55,5 +41,40 @@ public class SimpleCalculator {
         InputScreen inputScreen = new InputScreen();
         calculatorService.addObserver(inputScreen);
         screenPanel.add(inputScreen.getLabel());
+    }
+
+    public void configureNumericButtonsPanel(){
+        GridLayout numericScreenGridLayout = new GridLayout(4,3);
+
+        for (int i = 0; i <= 9; i++) {
+            NumericButtonController buttonController = new NumericButtonController(this.calculatorService,String.valueOf(i));
+            numericButtonsPanel.add(buttonController.getActionView().getButton());
+        }
+
+        this.numericButtonsPanel.setLayout(numericScreenGridLayout);
+    }
+
+    public void configureOperatorButtonsPanel(){
+        AdditionButtonController plusButton = new AdditionButtonController(this.calculatorService);
+        ResultButtonController equalButton = new ResultButtonController(this.calculatorService);
+
+        operatorButtonsPanel.add(plusButton.getActionView().getButton());
+        operatorButtonsPanel.add(equalButton.getActionView().getButton());
+
+    }
+
+    public void configureInterfaceCalculatorPanel() {
+        GridLayout interfaceGridLayout = new GridLayout(3, 1);
+        configureScreenPanel();
+        configureNumericButtonsPanel();
+        configureOperatorButtonsPanel();
+        calculatorPanel.add(screenPanel);
+        calculatorPanel.add(numericButtonsPanel);
+        calculatorPanel.add(operatorButtonsPanel);
+        calculatorPanel.setLayout(interfaceGridLayout);
+    }
+
+    public JPanel getCalculatorPanel() {
+        return calculatorPanel;
     }
 }
