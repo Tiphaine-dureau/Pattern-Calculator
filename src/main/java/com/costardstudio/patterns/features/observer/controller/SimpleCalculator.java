@@ -1,6 +1,7 @@
 package com.costardstudio.patterns.features.observer.controller;
 
 import com.costardstudio.patterns.features.observer.services.CalculatorService;
+import com.costardstudio.patterns.features.observer.view.CalculatorView;
 import com.costardstudio.patterns.features.observer.view.InputScreen;
 import com.costardstudio.patterns.features.observer.view.ResultScreen;
 
@@ -10,57 +11,49 @@ import java.awt.*;
 public class SimpleCalculator {
     CalculatorService calculatorService = new CalculatorService();
     private final JPanel screenPanel;
-    private final JPanel numericButtonsPanel;
-    private final JPanel operatorButtonsPanel;
+
     private final JPanel calculatorPanel;
+    private final CalculatorView calculatorView;
 
     //Constructor
     public SimpleCalculator() {
         calculatorPanel = new JPanel();
         screenPanel = new JPanel();
-        numericButtonsPanel = new JPanel();
-        operatorButtonsPanel = new JPanel();
+        calculatorView = new CalculatorView();
         configureInterfaceCalculatorPanel();
     }
 
-    public void configureScreenPanel(){
-        GridLayout screenGridLayout = new GridLayout( 2,1);
+    public void configureScreenPanel() {
+        GridLayout screenGridLayout = new GridLayout(2, 1);
         configureInputScreen();
         configureResultScreen();
         this.screenPanel.setLayout(screenGridLayout);
 
     }
 
-    public void configureResultScreen(){
+    public void configureResultScreen() {
         ResultScreen resultScreen = new ResultScreen();
         calculatorService.addObserver(resultScreen);
         screenPanel.add(resultScreen.getLabel());
     }
 
-    public void configureInputScreen(){
+    public void configureInputScreen() {
         InputScreen inputScreen = new InputScreen();
         calculatorService.addObserver(inputScreen);
         screenPanel.add(inputScreen.getLabel());
     }
 
-    public void configureNumericButtonsPanel(){
-        GridLayout numericScreenGridLayout = new GridLayout(4,3);
-
+    public void configureNumericButtonsPanel() {
         for (int i = 0; i <= 9; i++) {
-            NumericButtonController buttonController = new NumericButtonController(this.calculatorService,String.valueOf(i));
-            numericButtonsPanel.add(buttonController.getActionView().getButton());
+            NumericButtonController buttonController = new NumericButtonController(this.calculatorService, String.valueOf(i));
+            this.calculatorView.addNumericButtonToButtonsPanel(buttonController);
         }
-
-        this.numericButtonsPanel.setLayout(numericScreenGridLayout);
     }
 
-    public void configureOperatorButtonsPanel(){
+    public void configureOperatorButtonsPanel() {
         AdditionButtonController plusButton = new AdditionButtonController(this.calculatorService);
         ResultButtonController equalButton = new ResultButtonController(this.calculatorService);
-
-        operatorButtonsPanel.add(plusButton.getActionView().getButton());
-        operatorButtonsPanel.add(equalButton.getActionView().getButton());
-
+        this.calculatorView.addOperationsViewToButtonsPanel(plusButton, equalButton);
     }
 
     public void configureInterfaceCalculatorPanel() {
@@ -69,8 +62,8 @@ public class SimpleCalculator {
         configureNumericButtonsPanel();
         configureOperatorButtonsPanel();
         calculatorPanel.add(screenPanel);
-        calculatorPanel.add(numericButtonsPanel);
-        calculatorPanel.add(operatorButtonsPanel);
+        calculatorPanel.add(this.calculatorView.getNumericButtonsPanel());
+        calculatorPanel.add(this.calculatorView.getOperatorButtonsPanel());
         calculatorPanel.setLayout(interfaceGridLayout);
     }
 
