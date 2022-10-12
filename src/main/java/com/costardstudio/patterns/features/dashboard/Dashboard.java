@@ -12,6 +12,6 @@ public class Dashboard extends JFrame {
         JPanel panel = new JPanel();
         setContentPane(panel);
         SimpleCalculator simpleCalculator = new SimpleCalculator();
-        panel.add(simpleCalculator.getCalculatorPanel());
+        panel.add(simpleCalculator.getCalculatorView().getCalculatorPanel());
     }
 }

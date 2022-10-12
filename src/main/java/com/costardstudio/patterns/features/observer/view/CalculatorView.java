@@ -6,6 +6,7 @@ import com.costardstudio.patterns.features.observer.controller.ResultButtonContr
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 
 public class CalculatorView {
@@ -14,8 +15,10 @@ public class CalculatorView {
     private final JPanel operatorButtonsPanel;
     private final InputScreen inputScreen;
     private final ResultScreen resultScreen;
+    private final JPanel calculatorPanel;
 
 
+    // CONSTRUCTOR
     public CalculatorView() {
         screenPanel = new JPanel();
         inputScreen = new InputScreen();
@@ -23,42 +26,40 @@ public class CalculatorView {
         numericButtonsPanel = new JPanel();
         numericButtonsPanel.setLayout(new GridLayout(4, 3));
         operatorButtonsPanel = new JPanel();
+        calculatorPanel = new JPanel();
+    }
+
+    public void configureInterfaceCalculatorPanel(List<NumericButtonController> numericButtonControllers,
+                                                  AdditionButtonController plusButtonController,
+                                                  ResultButtonController equalButtonController) {
+        GridLayout interfaceGridLayout = new GridLayout(3, 1);
         configureScreenPanel();
+        configureNumericPanel(numericButtonControllers);
+        configureOperationsPanel(plusButtonController, equalButtonController);
+        calculatorPanel.add(this.screenPanel);
+        calculatorPanel.add(this.numericButtonsPanel);
+        calculatorPanel.add(this.operatorButtonsPanel);
+        calculatorPanel.setLayout(interfaceGridLayout);
     }
 
-    public void addResultScreen() {
-        screenPanel.add(this.resultScreen.getLabel());
-    }
-
-    public void addInputScreen() {
-        screenPanel.add(this.inputScreen.getLabel());
-    }
-
-    public void configureScreenPanel() {
+    private void configureScreenPanel() {
         GridLayout screenGridLayout = new GridLayout(2, 1);
-        addInputScreen();
-        addResultScreen();
+        this.screenPanel.add(this.inputScreen.getLabel());
+        this.screenPanel.add(this.resultScreen.getLabel());
         this.screenPanel.setLayout(screenGridLayout);
-
     }
 
-    public void addNumericButtonToButtonsPanel(NumericButtonController numericButtonControllers) {
-        numericButtonsPanel.add(numericButtonControllers.getActionView().getButton());
+    private void configureNumericPanel(List<NumericButtonController> numericButtonControllers) {
+        numericButtonControllers.forEach((NumericButtonController c) -> numericButtonsPanel.add(c.getActionView().getButton()));
     }
 
-    public void addOperationsViewToButtonsPanel(AdditionButtonController plusButton,
-                                                ResultButtonController equalButton) {
-        operatorButtonsPanel.add(plusButton.getActionView().getButton());
-        operatorButtonsPanel.add(equalButton.getActionView().getButton());
+    private void configureOperationsPanel(AdditionButtonController plusButtonController,
+                                          ResultButtonController equalButtonController) {
+        operatorButtonsPanel.add(plusButtonController.getActionView().getButton());
+        operatorButtonsPanel.add(equalButtonController.getActionView().getButton());
     }
 
-    public JPanel getOperatorButtonsPanel() {
-        return operatorButtonsPanel;
-    }
-
-    public JPanel getNumericButtonsPanel() {
-        return numericButtonsPanel;
-    }
+    // GETTERS / SETTERS
 
     public InputScreen getInputScreen() {
         return inputScreen;
@@ -68,7 +69,7 @@ public class CalculatorView {
         return resultScreen;
     }
 
-    public JPanel getScreenPanel() {
-        return screenPanel;
+    public JPanel getCalculatorPanel() {
+        return calculatorPanel;
     }
 }
