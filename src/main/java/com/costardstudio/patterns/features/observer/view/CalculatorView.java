@@ -49,25 +49,22 @@ public class CalculatorView {
     }
 
     private void configureNumericPanel(List<NumericButtonController> numericButtonControllers) {
-        // TODO utiliser la méthode addButtonToPanel
-        numericButtonControllers.forEach((NumericButtonController buttonController) -> numericButtonsPanel.add(buttonController.getActionView().getButton()));
+        numericButtonControllers.forEach((NumericButtonController buttonController) -> addButtonToPanel(numericButtonsPanel, buttonController));
     }
 
     private void configureOperationsPanel(AdditionButtonController plusButtonController,
                                           SubtractButtonController minusButtonController,
                                           ResultButtonController equalButtonController) {
-        // TODO utiliser la méthode addButtonToPanel
-        operatorButtonsPanel.add(plusButtonController.getActionView().getButton());
-        operatorButtonsPanel.add(minusButtonController.getActionView().getButton());
-        operatorButtonsPanel.add(equalButtonController.getActionView().getButton());
+        addButtonToPanel(operatorButtonsPanel, plusButtonController);
+        addButtonToPanel(operatorButtonsPanel, minusButtonController);
+        addButtonToPanel(operatorButtonsPanel, equalButtonController);
     }
 
-    private void addButtonToPanel(JPanel panel, CalculatorButtonController controller) {
-        // TODO
+    private void addButtonToPanel(JPanel panel, CalculatorButtonController buttonController) {
+        panel.add(buttonController.getActionView().getButton());
     }
 
     // GETTERS / SETTERS
-
     public InputScreen getInputScreen() {
         return inputScreen;
     }
