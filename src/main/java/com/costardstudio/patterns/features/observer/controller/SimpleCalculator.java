@@ -35,12 +35,12 @@ public class SimpleCalculator {
         List<NumericButtonController> numericButtonControllers = this.configureNumericButtonsPanel();
         AdditionButtonController plusButtonController = new AdditionButtonController(this.calculatorService);
         SubtractButtonController minusButtonController= new SubtractButtonController(this.calculatorService);
+        MultiplicationButtonController multiplicationButtonController = new MultiplicationButtonController(this.calculatorService);
         ResultButtonController equalButtonController = new ResultButtonController(this.calculatorService);
-        this.calculatorView.configureInterfaceCalculatorPanel(numericButtonControllers, plusButtonController, minusButtonController, equalButtonController);
+        this.calculatorView.configureInterfaceCalculatorPanel(numericButtonControllers, plusButtonController, minusButtonController, multiplicationButtonController, equalButtonController);
     }
 
     // GETTERS / SETTERS
-
     public CalculatorView getCalculatorView() {
         return calculatorView;
     }
