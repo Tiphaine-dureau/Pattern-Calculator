@@ -3,6 +3,7 @@ package com.costardstudio.patterns.features.observer.view;
 import com.costardstudio.patterns.features.observer.controller.AdditionButtonController;
 import com.costardstudio.patterns.features.observer.controller.NumericButtonController;
 import com.costardstudio.patterns.features.observer.controller.ResultButtonController;
+import com.costardstudio.patterns.features.observer.controller.SubtractButtonController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,11 +32,12 @@ public class CalculatorView {
 
     public void configureInterfaceCalculatorPanel(List<NumericButtonController> numericButtonControllers,
                                                   AdditionButtonController plusButtonController,
+                                                  SubtractButtonController minusButtonController,
                                                   ResultButtonController equalButtonController) {
         GridLayout interfaceGridLayout = new GridLayout(3, 1);
         configureScreenPanel();
         configureNumericPanel(numericButtonControllers);
-        configureOperationsPanel(plusButtonController, equalButtonController);
+        configureOperationsPanel(plusButtonController, minusButtonController, equalButtonController);
         calculatorPanel.add(this.screenPanel);
         calculatorPanel.add(this.numericButtonsPanel);
         calculatorPanel.add(this.operatorButtonsPanel);
@@ -54,8 +56,10 @@ public class CalculatorView {
     }
 
     private void configureOperationsPanel(AdditionButtonController plusButtonController,
+                                          SubtractButtonController minusButtonController,
                                           ResultButtonController equalButtonController) {
         operatorButtonsPanel.add(plusButtonController.getActionView().getButton());
+        operatorButtonsPanel.add(minusButtonController.getActionView().getButton());
         operatorButtonsPanel.add(equalButtonController.getActionView().getButton());
     }
 

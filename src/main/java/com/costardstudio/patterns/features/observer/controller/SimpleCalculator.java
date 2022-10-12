@@ -34,8 +34,9 @@ public class SimpleCalculator {
     private void configureInterfaceCalculatorPanel() {
         List<NumericButtonController> numericButtonControllers = this.configureNumericButtonsPanel();
         AdditionButtonController plusButtonController = new AdditionButtonController(this.calculatorService);
+        SubtractButtonController minusButtonController= new SubtractButtonController(this.calculatorService);
         ResultButtonController equalButtonController = new ResultButtonController(this.calculatorService);
-        this.calculatorView.configureInterfaceCalculatorPanel(numericButtonControllers, plusButtonController, equalButtonController);
+        this.calculatorView.configureInterfaceCalculatorPanel(numericButtonControllers, plusButtonController, minusButtonController, equalButtonController);
     }
 
     // GETTERS / SETTERS
