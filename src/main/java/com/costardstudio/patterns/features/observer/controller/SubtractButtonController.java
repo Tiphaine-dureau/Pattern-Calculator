@@ -8,7 +8,7 @@ import java.util.List;
 public class SubtractButtonController extends CalculatorButtonController {
 
     //CONSTRUCTOR
-    public SubtractButtonController(CalculatorService calculatorService){
+    public SubtractButtonController(CalculatorService calculatorService) {
         super(calculatorService, "-");
     }
 
@@ -19,9 +19,11 @@ public class SubtractButtonController extends CalculatorButtonController {
 
     @Override
     public int computeOperation(List<String> inputs) {
-        String a = inputs.get(0);
-        String b = inputs.get(1);
-        int subtraction = Integer.parseInt(a) - Integer.parseInt(b) ;
-        return subtraction;
+        int subtractResult = Integer.parseInt(inputs.get(0));
+        inputs.remove(0);
+        for (String input : inputs) {
+            subtractResult = subtractResult - Integer.parseInt(input);
+        }
+        return subtractResult;
     }
 }

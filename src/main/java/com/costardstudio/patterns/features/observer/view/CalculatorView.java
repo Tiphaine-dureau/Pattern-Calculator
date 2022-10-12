@@ -1,9 +1,6 @@
 package com.costardstudio.patterns.features.observer.view;
 
-import com.costardstudio.patterns.features.observer.controller.AdditionButtonController;
-import com.costardstudio.patterns.features.observer.controller.NumericButtonController;
-import com.costardstudio.patterns.features.observer.controller.ResultButtonController;
-import com.costardstudio.patterns.features.observer.controller.SubtractButtonController;
+import com.costardstudio.patterns.features.observer.controller.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -52,15 +49,21 @@ public class CalculatorView {
     }
 
     private void configureNumericPanel(List<NumericButtonController> numericButtonControllers) {
-        numericButtonControllers.forEach((NumericButtonController c) -> numericButtonsPanel.add(c.getActionView().getButton()));
+        // TODO utiliser la méthode addButtonToPanel
+        numericButtonControllers.forEach((NumericButtonController buttonController) -> numericButtonsPanel.add(buttonController.getActionView().getButton()));
     }
 
     private void configureOperationsPanel(AdditionButtonController plusButtonController,
                                           SubtractButtonController minusButtonController,
                                           ResultButtonController equalButtonController) {
+        // TODO utiliser la méthode addButtonToPanel
         operatorButtonsPanel.add(plusButtonController.getActionView().getButton());
         operatorButtonsPanel.add(minusButtonController.getActionView().getButton());
         operatorButtonsPanel.add(equalButtonController.getActionView().getButton());
+    }
+
+    private void addButtonToPanel(JPanel panel, CalculatorButtonController controller) {
+        // TODO
     }
 
     // GETTERS / SETTERS
