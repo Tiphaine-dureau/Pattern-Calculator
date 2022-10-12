@@ -9,13 +9,37 @@ import java.awt.*;
 
 
 public class CalculatorView {
+    private final JPanel screenPanel;
     private final JPanel numericButtonsPanel;
     private final JPanel operatorButtonsPanel;
+    private final InputScreen inputScreen;
+    private final ResultScreen resultScreen;
+
 
     public CalculatorView() {
+        screenPanel = new JPanel();
+        inputScreen = new InputScreen();
+        resultScreen = new ResultScreen();
         numericButtonsPanel = new JPanel();
         numericButtonsPanel.setLayout(new GridLayout(4, 3));
         operatorButtonsPanel = new JPanel();
+        configureScreenPanel();
+    }
+
+    public void addResultScreen() {
+        screenPanel.add(this.resultScreen.getLabel());
+    }
+
+    public void addInputScreen() {
+        screenPanel.add(this.inputScreen.getLabel());
+    }
+
+    public void configureScreenPanel() {
+        GridLayout screenGridLayout = new GridLayout(2, 1);
+        addInputScreen();
+        addResultScreen();
+        this.screenPanel.setLayout(screenGridLayout);
+
     }
 
     public void addNumericButtonToButtonsPanel(NumericButtonController numericButtonControllers) {
@@ -34,5 +58,17 @@ public class CalculatorView {
 
     public JPanel getNumericButtonsPanel() {
         return numericButtonsPanel;
+    }
+
+    public InputScreen getInputScreen() {
+        return inputScreen;
+    }
+
+    public ResultScreen getResultScreen() {
+        return resultScreen;
+    }
+
+    public JPanel getScreenPanel() {
+        return screenPanel;
     }
 }
