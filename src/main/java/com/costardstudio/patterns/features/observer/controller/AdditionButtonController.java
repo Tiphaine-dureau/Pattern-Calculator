@@ -16,7 +16,12 @@ public class AdditionButtonController extends CalculatorButtonController {
     }
 
     @Override
-    public int computeOperation(List<String> inputs) {
-        return inputs.stream().mapToInt(Integer::parseInt).sum();
+    public float computeOperation(List<String> inputs) {
+        float additionResult = Float.parseFloat(inputs.get(0));
+        inputs.remove(0);
+        for (String input : inputs) {
+            additionResult = additionResult + Float.parseFloat(input);
+        }
+        return additionResult;
     }
 }

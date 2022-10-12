@@ -16,7 +16,7 @@ public class NumericButtonController extends CalculatorButtonController {
     }
 
     @Override
-    public int computeOperation(List<String> inputs) {
+    public float computeOperation(List<String> inputs) {
         return 0;
     }
 }

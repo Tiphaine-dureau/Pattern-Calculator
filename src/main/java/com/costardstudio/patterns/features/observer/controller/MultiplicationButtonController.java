@@ -16,11 +16,11 @@ public class MultiplicationButtonController extends CalculatorButtonController {
     }
 
     @Override
-    public int computeOperation(List<String> inputs) {
-        int multiplicationResult = Integer.parseInt(inputs.get(0));
+    public float computeOperation(List<String> inputs) {
+        float multiplicationResult = Float.parseFloat(inputs.get(0));
         inputs.remove(0);
         for (String input : inputs) {
-            multiplicationResult = multiplicationResult * Integer.parseInt(input);
+            multiplicationResult = multiplicationResult * Float.parseFloat(input);
         }
         return multiplicationResult;
     }

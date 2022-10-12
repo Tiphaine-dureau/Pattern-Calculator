@@ -31,11 +31,12 @@ public class CalculatorView {
                                                   AdditionButtonController plusButtonController,
                                                   SubtractButtonController minusButtonController,
                                                   MultiplicationButtonController multiplicationButtonController,
+                                                  DivisionButtonController divisionButtonController,
                                                   ResultButtonController equalButtonController) {
         GridLayout interfaceGridLayout = new GridLayout(3, 1);
         configureScreenPanel();
         configureNumericPanel(numericButtonControllers);
-        configureOperationsPanel(plusButtonController, minusButtonController, multiplicationButtonController, equalButtonController);
+        configureOperationsPanel(plusButtonController, minusButtonController, multiplicationButtonController, divisionButtonController, equalButtonController);
         calculatorPanel.add(this.screenPanel);
         calculatorPanel.add(this.numericButtonsPanel);
         calculatorPanel.add(this.operatorButtonsPanel);
@@ -56,10 +57,12 @@ public class CalculatorView {
     private void configureOperationsPanel(AdditionButtonController plusButtonController,
                                           SubtractButtonController minusButtonController,
                                           MultiplicationButtonController multiplicationButtonController,
+                                          DivisionButtonController divisionButtonController,
                                           ResultButtonController equalButtonController) {
         addButtonToPanel(operatorButtonsPanel, plusButtonController);
         addButtonToPanel(operatorButtonsPanel, minusButtonController);
         addButtonToPanel(operatorButtonsPanel, multiplicationButtonController);
+        addButtonToPanel(operatorButtonsPanel, divisionButtonController);
         addButtonToPanel(operatorButtonsPanel, equalButtonController);
     }
 
